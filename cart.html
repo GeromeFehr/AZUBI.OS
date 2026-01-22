@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>AZUBI.OS – Warenkorb</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="wrap">
@@ -30,14 +30,14 @@
     <section class="card section">
       <h2>Warenkorb</h2>
       <p>
-        Hier liegt dein Produkt. Für die <b>30 Tage Testversion</b> geht’s über Checkout:
-        erst <b>Rechnungsadresse</b>, dann <b>Trial starten</b>.
+        Check: erst im Warenkorb → dann Checkout → Adresse → 30 Tage Trial.
       </p>
 
       <div class="split" style="display:grid; grid-template-columns: 1.2fr .8fr; gap: 14px; margin-top:14px;">
-        <!-- LEFT: ITEMS -->
+
+        <!-- LEFT -->
         <div class="tile" style="border-radius:18px;">
-          <!-- Empty state -->
+          <!-- EMPTY -->
           <div id="emptyState" style="display:none;">
             <div class="tile" style="border-radius:18px;">
               <div style="font-weight:950; font-size:16px;">Dein Warenkorb ist leer.</div>
@@ -51,46 +51,44 @@
             </div>
           </div>
 
-          <!-- Item list -->
-          <div id="itemsWrap" style="display:grid; gap:12px;">
-            <div class="cart-item" id="cartItem" style="display:none;">
-              <div class="cart-thumb">
-                <img id="itemImg" src="azubios-box.png" alt="" />
-              </div>
-              <div>
-                <div class="cart-name" id="itemName">AZUBI.OS – Alpha Build</div>
-                <div class="cart-meta" id="itemMeta">Einmalig • Lizenzbox</div>
-
-                <div class="cart-row">
-                  <div style="display:flex; gap:10px; align-items:center;">
-                    <span style="font-weight:950;" id="itemPrice">€ 29,95</span>
-                    <span class="chip" id="itemQtyChip">x1</span>
-                  </div>
-
-                  <div style="display:flex; gap:8px; align-items:center;">
-                    <button class="tinybtn" id="minusBtn" type="button">−</button>
-                    <button class="tinybtn" id="plusBtn" type="button">+</button>
-                    <button class="tinybtn" id="removeAllBtn" type="button">Entfernen</button>
-                  </div>
-                </div>
-
-                <p class="mini" style="margin-top:10px;">
-                  Hinweis: Demo-Shop ohne echtes Payment. Flow ist trotzdem wie ein echter Store.
-                </p>
-              </div>
+          <!-- ITEM -->
+          <div class="cart-item" id="cartItem" style="display:none;">
+            <div class="cart-thumb">
+              <img id="itemImg" src="azubios-box.png" alt="Produkt" />
             </div>
 
-            <div class="tile" style="border-radius:18px;">
-              <div style="font-weight:950;">Warum Checkout?</div>
-              <p style="margin:6px 0 0; color:rgba(255,255,255,.72); line-height:1.55;">
-                Wir verlangen die Rechnungsadresse <b>vor</b> dem Trial, für die
-                Lizenz-Zuordnung, Validierung und dem sauberen Prozess – <b>nur Demo</b>.
+            <div>
+              <div class="cart-name" id="itemName">AZUBI.OS – Alpha Build</div>
+              <div class="cart-meta">Einmalig • Lizenzbox (imaginär)</div>
+
+              <div class="cart-row">
+                <div style="display:flex; gap:10px; align-items:center;">
+                  <span style="font-weight:950;" id="itemPrice">€ 29,95</span>
+                  <span class="chip" id="itemQtyChip">x1</span>
+                </div>
+
+                <div style="display:flex; gap:8px; align-items:center;">
+                  <button class="tinybtn" id="minusBtn" type="button">−</button>
+                  <button class="tinybtn" id="plusBtn" type="button">+</button>
+                  <button class="tinybtn" id="removeAllBtn" type="button">Entfernen</button>
+                </div>
+              </div>
+
+              <p class="mini" style="margin-top:10px;">
+                Demo-Shop: localStorage only. Keine echten Zahlungen.
               </p>
             </div>
           </div>
+
+          <div class="tile" style="border-radius:18px; margin-top:12px;">
+            <div style="font-weight:950;">Warum Checkout?</div>
+            <p style="margin:6px 0 0; color:rgba(255,255,255,.72); line-height:1.55;">
+              Damit der Flow wie ein echter Shop wirkt: Rechnungsadresse → Review → Trial-Key → Success.
+            </p>
+          </div>
         </div>
 
-        <!-- RIGHT: SUMMARY -->
+        <!-- RIGHT SUMMARY -->
         <div class="tile" style="border-radius:18px;">
           <div class="sum">
             <div style="display:flex; justify-content:space-between;">
@@ -114,126 +112,17 @@
             <button class="btn" id="clearCartBtn" type="button">Warenkorb leeren</button>
           </div>
 
-          <p class="mini">
-            Pro-Tipp: Wenn das Bild nicht aktualisiert → Cache: Dateiname ändern (v2) oder Hard Refresh.
-          </p>
+          <p class="mini">Wenn dein Browser cached: Hard Refresh (Strg+F5).</p>
         </div>
       </div>
     </section>
 
     <div class="footer">
-      © 2026 – AZUBI.OS Built by Jotham • Noah • Gérôme. Pink Mode forever.
+      © 2026 – AZUBI.OS (imaginär). <a href="agb.html">AGB</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="impressum.html">Impressum</a>
     </div>
 
   </div>
 
-  <script type="module">
-    import {
-      PRODUCT,
-      store,
-      fmtEUR,
-      toast,
-      updateCartBadge,
-      cartSubtotal,
-      cartCount,
-      cartAddOne,
-      cartRemoveAll,
-      ensureProductInCart
-    } from "./shop.js";
-
-    const $ = (id) => document.getElementById(id);
-
-    function normalizeCart() {
-  const cart = store.getCart();
-
-  // Map: id -> item (qty wird summiert)
-  const map = new Map();
-
-  for (const it of cart) {
-    if (!it?.id) continue;
-
-    const existing = map.get(it.id);
-    if (!existing) {
-      map.set(it.id, { ...it, qty: Math.max(1, Number(it.qty) || 1) });
-    } else {
-      existing.qty += Math.max(1, Number(it.qty) || 1);
-      map.set(it.id, existing);
-    }
-  }
-  const normalized = [...map.values()];
-  store.setCart(normalized);
-  return normalized;
-}    
-    function render() {
-      const cart = store.getCart();
-      const count = cartCount(cart);
-      updateCartBadge();
-
-      const empty = count <= 0;
-      $("emptyState").style.display = empty ? "block" : "none";
-      $("cartItem").style.display = empty ? "none" : "grid";
-      $("checkoutLink").style.opacity = empty ? ".5" : "1";
-      $("checkoutLink").style.pointerEvents = empty ? "none" : "auto";
-
-      const subtotal = cartSubtotal(cart);
-      $("subtotal").textContent = fmtEUR(subtotal);
-      $("dueToday").textContent = fmtEUR(0);
-
-      if (!empty) {
-        const it = cart.find(i => i.id === PRODUCT.id) || cart[0];
-        $("itemImg").src = it.img || "azubios-box.png";
-        $("itemName").textContent = it.name || "AZUBI.OS";
-        $("itemMeta").textContent = "Einmalig • Lizenzbox (imaginär)";
-        $("itemPrice").textContent = fmtEUR(it.price || 0);
-        $("itemQtyChip").innerHTML = `x${it.qty || 1}`;
-      }
-    }
-
-    function addOne() {
-      cartAddOne();
-      toast("➕ Menge erhöht.");
-      render();
-    }
-
-    function minusOne() {
-      const cart = store.getCart();
-      const idx = cart.findIndex(i => i.id === PRODUCT.id);
-      if (idx < 0) return;
-
-      cart[idx].qty = Math.max(0, (cart[idx].qty || 0) - 1);
-
-      // Wenn qty 0 -> entfernen
-      if (cart[idx].qty <= 0) cart.splice(idx, 1);
-
-      store.setCart(cart);
-      toast("➖ Menge reduziert.");
-      render();
-    }
-
-    function removeAll() {
-      const cart = store.getCart().filter(i => i.id !== PRODUCT.id);
-      store.setCart(cart);
-      toast("🗑️ Artikel entfernt.");
-      render();
-    }
-
-    function clearCart() {
-      cartRemoveAll();
-      toast("🧹 Warenkorb geleert.");
-      render();
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-      // Badge + initial render
-      updateCartBadge();
-      render();
-
-      // Bind buttons (exist even if hidden)
-      $("plusBtn")?.addEventListener("click", addOne);
-      $("minusBtn")?.addEventListener("click", minusOne);
-      $("removeAllBtn")?.addEventListener("click", removeAll);
-      $("clearCartBtn")?.addEventListener("click", clearCart);
-    });
-  </script>
+  <script type="module" src="cart.js"></script>
 </body>
 </html>
