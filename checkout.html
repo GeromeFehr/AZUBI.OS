@@ -4,10 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>AZUBI.OS – Checkout</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="wrap">
+
     <div class="topbar">
       <div class="brand">
         <span class="dot" aria-hidden="true"></span>
@@ -16,8 +17,11 @@
       </div>
 
       <nav class="nav">
-        <a href="index.html#features">Features</a>
+        <a href="index.html">Home</a>
         <a href="cart.html">Warenkorb <span class="cart-badge" id="cartCount">0</span></a>
+        <a href="agb.html">AGB</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="impressum.html">Impressum</a>
       </nav>
 
       <a class="btn btn-primary" href="cart.html">Zurück</a>
@@ -25,7 +29,7 @@
 
     <section class="card section">
       <h2>Checkout – 30 Tage Testversion</h2>
-      <p>Erst Rechnungsadresse, dann bekommst du die <b>Testversion</b>.</p>
+      <p>Erst Rechnungsadresse, dann bekommst du die <b>Testversion</b>. (Demo, kein echtes Payment)</p>
 
       <div class="modal-card" style="margin-top:14px;">
         <div class="modal-body">
@@ -134,13 +138,12 @@
       </div>
     </section>
 
-    <div class="footer">© 2026 – AZUBI.OS Built by Jotham • Noah • Gérôme.</div>
+    <div class="footer">
+      © 2026 – AZUBI.OS (imaginär). <a href="agb.html">AGB</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="impressum.html">Impressum</a>
+    </div>
+
   </div>
 
-  <script type="module">
-    import { bindGlobalNav } from "./shop.js";
-    bindGlobalNav();
-  </script>
   <script type="module" src="checkout.js"></script>
 </body>
 </html>
