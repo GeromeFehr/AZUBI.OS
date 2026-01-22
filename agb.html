@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AZUBI.OS – AGB</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <span>AZUBI.OS</span>
+        <span class="chip"><b>Legal</b> AGB</span>
+      </div>
+
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="cart.html" class="cart-link">Warenkorb <span class="cart-badge" id="cartCount">0</span></a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="impressum.html">Impressum</a>
+      </nav>
+
+      <a class="btn btn-primary" href="index.html">Zurück</a>
+    </div>
+
+    <section class="card section">
+      <h2>Allgemeine Geschäftsbedingungen (Demo / Schulprojekt)</h2>
+      <p>
+        Diese AGB sind eine <b>Projektvorlage</b> für einen Demo-Shop. Es findet <b>kein echter Verkauf</b> statt.
+        Bestellungen, Zahlungen, Lieferungen und Verträge werden nur simuliert.
+      </p>
+
+      <div class="tile" style="border-radius:18px;">
+        <h3 style="margin:0 0 8px;">1. Geltungsbereich</h3>
+        <p style="margin:0; color:rgba(255,255,255,.72); line-height:1.6;">
+          Diese Bedingungen gelten für die Nutzung dieser Demo-Seite und den simulierten Checkout-Prozess.
+        </p>
+      </div>
+
+      <div class="tile" style="border-radius:18px; margin-top:12px;">
+        <h3 style="margin:0 0 8px;">2. Angebot / Testversion</h3>
+        <p style="margin:0; color:rgba(255,255,255,.72); line-height:1.6;">
+          Es wird eine <b>30 Tage Testversion</b> dargestellt. Die Freischaltung erfolgt nur als Demo-Flow im Frontend.
+          Eine echte Lizenzierung findet nicht statt.
+        </p>
+      </div>
+
+      <div class="tile" style="border-radius:18px; margin-top:12px;">
+        <h3 style="margin:0 0 8px;">3. Preise & Zahlung</h3>
+        <p style="margin:0; color:rgba(255,255,255,.72); line-height:1.6;">
+          Alle Preise sind fiktiv. Es erfolgt keine Zahlungsabwicklung. “Heute fällig: 0,00 €” ist Teil der Simulation.
+        </p>
+      </div>
+
+      <div class="tile" style="border-radius:18px; margin-top:12px;">
+        <h3 style="margin:0 0 8px;">4. Haftung</h3>
+        <p style="margin:0; color:rgba(255,255,255,.72); line-height:1.6;">
+          Die Seite dient dem Lernen/Demonstrieren. Es wird keine Gewähr für Verfügbarkeit, Fehlerfreiheit oder Inhalte übernommen.
+        </p>
+      </div>
+
+      <p class="mini" style="margin-top:14px;">
+        Hinweis: Für echte Shops müssen AGB rechtlich korrekt erstellt und geprüft werden.
+      </p>
+    </section>
+
+    <div class="footer">
+      © 2026 – AZUBI.OS (imaginär). <a href="agb.html">AGB</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="impressum.html">Impressum</a>
+    </div>
+  </div>
+
+  <script type="module">
+    import { updateCartBadge } from "./shop.js";
+    updateCartBadge();
+  </script>
+</body>
+</html>
