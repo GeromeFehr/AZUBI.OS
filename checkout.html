@@ -4,156 +4,143 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>AZUBI.OS – Checkout</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="index.html">
-      <span class="dot"></span><span class="brand-title">AZUBI.OS</span>
-      <span class="chip"><b>IT25</b> Alpha Build</span>
-    </a>
-    <nav class="nav">
-      <a href="cart.html">Warenkorb</a>
-      <a href="index.html">Home</a>
-      <a class="cart-link" href="cart.html">Cart <span class="cart-badge" id="cartCount">0</span></a>
-    </nav>
-    <button class="btn btn-primary" onclick="location.href='cart.html'">Zurück</button>
-  </header>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <span>AZUBI.OS</span>
+        <span class="chip"><b>IT25</b> Checkout</span>
+      </div>
 
-  <main class="wrap">
+      <nav class="nav">
+        <a href="index.html#features">Features</a>
+        <a href="cart.html">Warenkorb <span class="cart-badge" id="cartCount">0</span></a>
+      </nav>
+
+      <a class="btn btn-primary" href="cart.html">Zurück</a>
+    </div>
+
     <section class="card section">
-      <h2>Checkout</h2>
-      <p>
-        Regel: <b>Erst Rechnungsadresse</b>, dann wird die <b>30 Tage Testversion</b> freigeschaltet.
-        (Demo-Flow, kein echtes Bezahlen)
-      </p>
+      <h2>Checkout – 30 Tage Testversion</h2>
+      <p>Erst Rechnungsadresse, dann bekommst du die <b>Testversion</b>. (Demo, kein echtes Payment)</p>
 
-      <div class="splitCart">
-        <!-- LEFT -->
-        <div class="tile">
-          <div class="stepper">
-            <span class="step active" id="step1">1) Rechnungsadresse</span>
-            <span class="step" id="step2">2) Trial auswählen</span>
-            <span class="step" id="step3">3) Bestätigen</span>
+      <div class="modal-card" style="margin-top:14px;">
+        <div class="modal-body">
+          <div class="pane">
+            <div class="stepper">
+              <span class="step active" id="stepA">1) Rechnungsadresse</span>
+              <span class="step" id="stepB">2) Review & Start</span>
+            </div>
+
+            <div class="sum">
+              <div style="display:flex; justify-content:space-between;">
+                <span>Rechnungsadresse</span><b id="addrStatus">❌ fehlt</b>
+              </div>
+              <div style="display:flex; justify-content:space-between;">
+                <span>Testversion</span><b>30 Tage</b>
+              </div>
+              <div class="line2"></div>
+              <div style="display:flex; justify-content:space-between;">
+                <span>Zwischensumme</span><b id="subtotal">€ 0,00</b>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:16px;">
+                <span>Heute fällig</span><b id="dueToday">€ 0,00</b>
+              </div>
+            </div>
+
+            <p class="hint">Pro-Tipp: Flow ist absichtlich wie ein echter Shop – nur ohne Backend.</p>
           </div>
 
-          <form id="billingForm" class="form">
-            <div>
-              <label>Vollständiger Name</label>
-              <input id="f_name" placeholder="z.B. Max Mustermann" autocomplete="name">
-            </div>
+          <div class="pane">
+            <!-- STEP 1 -->
+            <div id="panelAddress">
+              <h3 style="margin:0 0 8px;">Rechnungsadresse</h3>
+              <p style="margin:0 0 12px; color:var(--muted);">Bitte vollständig ausfüllen.</p>
 
-            <div class="row2">
-              <div>
-                <label>Straße + Hausnr.</label>
-                <input id="f_street" placeholder="z.B. Beispielweg 7" autocomplete="street-address">
-              </div>
-              <div>
-                <label>PLZ</label>
-                <input id="f_zip" placeholder="z.B. 20095" inputmode="numeric">
-              </div>
-            </div>
-
-            <div class="row2">
-              <div>
-                <label>Stadt</label>
-                <input id="f_city" placeholder="z.B. Hamburg" autocomplete="address-level2">
-              </div>
-              <div>
-                <label>Land</label>
-                <select id="f_country">
-                  <option value="DE" selected>Deutschland</option>
-                  <option value="AT">Österreich</option>
-                  <option value="CH">Schweiz</option>
-                </select>
-              </div>
-            </div>
-
-            <div>
-              <label>E-Mail (für Trial-Link)</label>
-              <input id="f_email" placeholder="z.B. you@domain.de" inputmode="email" autocomplete="email">
-            </div>
-
-            <div class="err" id="addrErr">Bitte fülle alle Felder korrekt aus.</div>
-
-            <div class="cta">
-              <button type="button" class="btn btn-primary" id="saveAddressBtn">Adresse speichern</button>
-              <a class="btn" href="cart.html">Abbrechen</a>
-            </div>
-
-            <p class="mini">Wir speichern (Demo) optional lokal im Browser (localStorage) – kein Server.</p>
-          </form>
-
-          <div id="trialPanel" style="display:none; margin-top:14px;">
-            <h3 style="margin:0 0 8px;">✅ Testversion freigeschaltet</h3>
-            <p style="margin:0 0 12px; color:var(--muted);">Adresse ok. Wähle jetzt deine Trial-Option.</p>
-
-            <div class="trialGrid">
-              <label class="trialCard">
-                <input type="radio" name="trial" value="trial30" checked>
+              <form class="form">
                 <div>
-                  <b>30 Tage gratis</b>
-                  <div class="muted">Standard Trial • Heute: € 0,00</div>
+                  <label>Vollständiger Name</label>
+                  <input id="f_name" placeholder="z.B. Max Mustermann" autocomplete="name" />
                 </div>
-              </label>
 
-              <label class="trialCard">
-                <input type="radio" name="trial" value="trial30_plus">
+                <div class="row2">
+                  <div>
+                    <label>Straße + Hausnr.</label>
+                    <input id="f_street" placeholder="z.B. Beispielweg 7" autocomplete="street-address" />
+                  </div>
+                  <div>
+                    <label>PLZ</label>
+                    <input id="f_zip" placeholder="z.B. 20095" inputmode="numeric" />
+                  </div>
+                </div>
+
+                <div class="row2">
+                  <div>
+                    <label>Stadt</label>
+                    <input id="f_city" placeholder="z.B. Hamburg" autocomplete="address-level2" />
+                  </div>
+                  <div>
+                    <label>Land</label>
+                    <select id="f_country">
+                      <option value="DE" selected>Deutschland</option>
+                      <option value="AT">Österreich</option>
+                      <option value="CH">Schweiz</option>
+                    </select>
+                  </div>
+                </div>
+
                 <div>
-                  <b>30 Tage + “TD95 Boost”</b>
-                  <div class="muted">extra Fun • Heute: € 0,00</div>
+                  <label>E-Mail (für Trial-Link)</label>
+                  <input id="f_email" placeholder="z.B. you@domain.de" inputmode="email" autocomplete="email" />
                 </div>
-              </label>
+
+                <div class="err" id="addrErr">Bitte fülle alle Felder korrekt aus.</div>
+
+                <div class="cta" style="margin-top: 6px;">
+                  <button class="btn btn-primary" id="saveAddressBtn" type="button">Adresse speichern</button>
+                  <a class="btn" href="cart.html">Abbrechen</a>
+                </div>
+              </form>
             </div>
 
-            <div class="cta" style="margin-top:12px;">
-              <button class="btn btn-primary" id="confirmBtn" type="button">Bestellung bestätigen</button>
-              <button class="btn" id="editAddrBtn" type="button">Adresse bearbeiten</button>
+            <!-- STEP 2 -->
+            <div id="panelReview" style="display:none;">
+              <h3 style="margin:0 0 8px;">Review & Testversion starten</h3>
+              <p style="margin:0 0 12px; color:var(--muted);">
+                Adresse ist gesetzt – du kannst jetzt starten.
+              </p>
+
+              <div class="tile" style="border-radius:18px;">
+                <div style="font-weight:950; margin-bottom:6px;">Rechnungsadresse</div>
+                <div id="addrPreview" style="color:rgba(255,255,255,.78); line-height:1.45;"></div>
+                <div class="cta" style="margin-top:10px;">
+                  <button class="btn" id="editAddressBtn" type="button">Bearbeiten</button>
+                </div>
+              </div>
+
+              <div class="cta" style="margin-top: 12px;">
+                <button class="btn btn-primary" id="startTrialBtn" type="button">30 Tage Test starten</button>
+                <a class="btn" href="cart.html">Zum Warenkorb</a>
+              </div>
+
+              <p class="mini">Demo: Keine echte Zahlung, kein echter Versand. Nur Shop-Flow.</p>
             </div>
 
-            <div class="ok" id="confirmOk">Bestätigt! Weiterleitung…</div>
           </div>
-        </div>
-
-        <!-- RIGHT -->
-        <div class="tile">
-          <h3 style="margin-top:0;">Zusammenfassung</h3>
-          <div id="checkoutSummary"></div>
-
-          <div class="sum" style="margin-top:12px;">
-            <div class="sumRow"><span>Zwischensumme</span><b id="subtotal">€ 0,00</b></div>
-            <div class="sumRow"><span>Trial</span><b>€ 0,00</b></div>
-            <div class="line2"></div>
-            <div class="sumRow big"><span>Heute fällig</span><b>€ 0,00</b></div>
-          </div>
-
-          <p class="mini">
-            In einem echten Shop würde hier ein Backend: Zahlung, Rechnung, Lizenz & E-Mail übernehmen.
-            Wir simulieren das sauber im Frontend.
-          </p>
         </div>
       </div>
     </section>
 
-    <footer class="footer">
-      <div>© 2026 AZUBI.OS • <a href="datenschutz.html">Datenschutz</a> • <a href="impressum.html">Impressum</a></div>
-    </footer>
-  </main>
+    <div class="footer">© 2026 – AZUBI.OS (imaginär). Built by Jotham • Noah • Gérôme.</div>
+  </div>
 
-  <script src="js/shop.js"></script>
-  <script>
-    Shop.renderCheckoutPage();
-
-    document.getElementById("saveAddressBtn").addEventListener("click", () => {
-      const ok = Shop.saveBillingFromForm();
-      if (ok) Shop.unlockTrialUI();
-    });
-
-    document.getElementById("editAddrBtn")?.addEventListener("click", () => Shop.editAddress());
-
-    document.getElementById("confirmBtn")?.addEventListener("click", () => {
-      Shop.confirmOrderAndGoSuccess();
-    });
+  <script type="module">
+    import { bindGlobalNav } from "./shop.js";
+    bindGlobalNav();
   </script>
+  <script type="module" src="checkout.js"></script>
 </body>
 </html>
