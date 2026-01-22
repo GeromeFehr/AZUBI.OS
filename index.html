@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>AZUBI.OS – Shop</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>AZUBI.OS</span>
+        <span class="chip"><b>IT25</b> Shop Build</span>
+      </div>
+      <div class="nav">
+        <a href="index.html">Shop</a>
+        <a href="cart.html">Warenkorb <span class="badgeCart" id="cartCount">0</span></a>
+        <a href="agb.html">AGB</a>
+      </div>
+      <a class="btn btn-primary" href="checkout.html">Jetzt holen</a>
+    </div>
+
+    <div class="grid2" style="margin-top:18px;">
+      <div class="card section">
+        <h1><span style="background:linear-gradient(135deg,#fff,rgba(255,255,255,.85),rgba(255,79,216,.95));-webkit-background-clip:text;background-clip:text;color:transparent;">AZUBI.OS</span></h1>
+        <p>Premium Pink/Glow • Lowkey tough • Für Azubis gebaut. Shop-Flow wie ein echter Store – nur als Projekt.</p>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
+          <button class="btn btn-primary" id="btnAddToCart">In den Warenkorb</button>
+          <a class="btn" href="cart.html">Zum Warenkorb</a>
+          <span class="chip">by <b>Jotham</b> | <b>Noah</b> | <b>Gérôme</b></span>
+        </div>
+
+        <div class="card section" style="margin-top:14px;">
+          <h2 style="font-size:18px;">30 Tage gratis Testversion</h2>
+          <p class="small">
+            Erst <b>Rechnungsadresse</b> angeben → dann Trial aktivieren.  
+            (Realistische Shop-Logik, aber komplett frontend-only.)
+          </p>
+        </div>
+      </div>
+
+      <div class="card section">
+        <div class="product-stage">
+          <div class="product-wrap">
+            <img class="product-img" src="azubios-box.png" alt="AZUBI.OS Produktbox"/>
+          </div>
+        </div>
+
+        <div class="card section" style="margin-top:14px;">
+          <h2 style="font-size:18px;">€ 29,95</h2>
+          <div class="small">Einmalig • Alpha Build Lizenz (Demo)</div>
+          <div style="margin-top:10px;">
+            <span class="chip">⭐ Bestseller</span>
+            <span class="chip">✨ Pink Mode</span>
+            <span class="chip">😉 TD95 inside</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <a href="impressum.html">Impressum</a> •
+      <a href="datenschutz.html">Datenschutz</a> •
+      <a href="agb.html">AGB</a>
+    </div>
+  </div>
+
+  <script src="shop.js"></script>
+</body>
+</html>
