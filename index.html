@@ -1,94 +1,165 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>AZUBI.OS – Shop</title>
-  <link rel="stylesheet" href="style.css"/>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AZUBI.OS – Offizieller Shop</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="wrap">
+
+    <!-- TOPBAR -->
     <div class="topbar">
       <div class="brand">
-        <span class="dot"></span>
+        <span class="dot" aria-hidden="true"></span>
         <span>AZUBI.OS</span>
-        <span class="chip"><b>IT25</b> Shop Build</span>
+        <span class="chip"><b>IT25</b> Alpha Shop</span>
       </div>
-      <div class="nav">
-        <a href="index.html">Shop</a>
-        <a href="cart.html">Warenkorb <span class="badgeCart" id="cartCount">0</span></a>
+
+      <nav class="nav">
+        <a href="#features">Features</a>
+        <a href="#buy">Jetzt holen</a>
         <a href="agb.html">AGB</a>
-      </div>
-      <a class="btn btn-primary" href="checkout.html">Jetzt holen</a>
+        <a href="datenschutz.html">Datenschutz</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="cart.html" class="cart-link">
+          Warenkorb <span class="cart-badge" id="cartCount">0</span>
+        </a>
+      </nav>
+
+      <a class="btn btn-primary" href="#buy">Shop</a>
     </div>
 
-    <div class="grid2" style="margin-top:18px;">
-      <div class="card section">
-        <h1><span style="background:linear-gradient(135deg,#fff,rgba(255,255,255,.85),rgba(255,79,216,.95));-webkit-background-clip:text;background-clip:text;color:transparent;">AZUBI.OS</span></h1>
-        <p>Premium Pink/Glow • Lowkey tough • Für Azubis gebaut. Shop-Flow wie ein echter Store – nur als Projekt.</p>
+    <!-- HERO -->
+    <section class="hero card section">
+      <div class="hero-grid">
+        <div>
+          <div class="badge">✨ Pink/Glow UI • Fokus • Ordnung • Progress</div>
+          <h1>AZUBI.OS</h1>
+          <p class="lead">
+            Das imaginäre Betriebssystem für Azubis: <b>Workflow</b>, <b>Tools</b> und <b>Focus Mode</b> – alles in einem.
+            Perfekt für eure Projekt-Präsentation: Shop-Flow, Warenkorb, Checkout und 30 Tage Testversion.
+          </p>
 
-        <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:12px;">
-          <button class="btn btn-primary" id="btnAddToCart">In den Warenkorb</button>
-          <a class="btn" href="cart.html">Zum Warenkorb</a>
-          <span class="chip">by <b>Jotham</b> | <b>Noah</b> | <b>Gérôme</b></span>
-        </div>
+          <div class="cta">
+            <!-- Wichtig: data-add-to-cart bindet automatisch den Warenkorb -->
+            <a class="btn btn-primary" href="#" data-add-to-cart>Jetzt holen</a>
+            <a class="btn" href="#features">Features ansehen</a>
+            <a class="btn" href="cart.html">Zum Warenkorb</a>
+          </div>
 
-        <div class="card section" style="margin-top:14px;">
-          <h2 style="font-size:18px;">30 Tage gratis Testversion</h2>
-          <p class="small">
-            Erst <b>Rechnungsadresse</b> angeben → dann Trial aktivieren. 
+          <p class="mini">
+            Built by Jotham • Noah • Gérôme — Easteregg: <b>TD95 approved</b> 😏
           </p>
         </div>
-      </div>
 
-      <div class="card section">
-        <div class="product-stage">
-          <div class="product-wrap">
-            <img class="product-img" src="azubios-box.png" alt="AZUBI.OS Produktbox"/>
-          </div>
-        </div>
-
-        <div class="card section" style="margin-top:14px;">
-          <h2 style="font-size:18px;">€ 29,95</h2>
-          <div class="small">Einmalig • Alpha Build Lizenz</div>
-          <div style="margin-top:10px;">
-            <span class="chip">⭐ Bestseller</span>
-            <span class="chip">✨ Pink Mode</span>
-            <span class="chip">😉 TD95 inside</span>
+        <div class="hero-product">
+          <div class="product-frame">
+            <img src="azubios-box.png" alt="AZUBI.OS Produktbox" />
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
+    <!-- FEATURES -->
+    <section id="features" class="card section">
+      <h2>Features</h2>
+
+      <div class="grid3">
+        <div class="tile">
+          <div class="tile-title">🚀 Fokus Workflow</div>
+          <p class="tile-text">Minimalistisch, aber tough. Kein Overload – nur die wichtigsten Schritte für strukturierte Arbeit.</p>
+        </div>
+
+        <div class="tile">
+          <div class="tile-title">🧠 Lern-Boost</div>
+          <p class="tile-text">Shop-Flow ideal zum Präsentieren: Warenkorb, Checkout, Adresseingabe, Review und Trial-Start.</p>
+        </div>
+
+        <div class="tile">
+          <div class="tile-title">💿 Alpha Build Lizenz</div>
+          <p class="tile-text">Imaginäres Produkt mit “Lizenz-Key” und Success-Page. Sieht aus wie ein echter Store.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BUY -->
+    <section id="buy" class="card section">
+      <h2>Hol dir AZUBI.OS</h2>
+
+      <div class="buy-grid">
+        <div class="buy-left">
+          <div class="product-card">
+            <div class="product-img">
+              <img src="azubios-box.png" alt="AZUBI.OS Box" />
+            </div>
+
+            <div class="product-info">
+              <div class="price-row">
+                <div class="price">€ 29,95</div>
+                <div class="pill"><span class="star">★</span> Bestseller</div>
+              </div>
+
+              <div class="subtitle">Einmalig • “Alpha Build” Lizenz</div>
+
+              <ul class="bullets">
+                <li>Premium UI-Feeling (Pink/Glow)</li>
+                <li>Azubi-Workflow: Fokus, Ordnung, Progress</li>
+                <li>TD95-Easteregg inklusive (damit er grinst)</li>
+              </ul>
+
+              <div class="cta">
+                <a class="btn btn-primary" href="#" data-add-to-cart>In den Warenkorb</a>
+                <a class="btn" href="checkout.html">Direkt zum Checkout</a>
+              </div>
+
+              <p class="mini">
+                Hinweis: Demo-Shop (Schulprojekt), kein echtes Payment.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="buy-right">
+          <div class="tile">
+            <div class="tile-title">✅ 30 Tage Testversion</div>
+            <p class="tile-text">
+              Du bekommst die Testversion erst nach Eingabe einer Rechnungsadresse.
+              Genau wie im echten Shop – nur ohne Backend.
+            </p>
+            <div class="cta">
+              <a class="btn btn-primary" href="checkout.html">Test starten</a>
+              <a class="btn" href="cart.html">Warenkorb prüfen</a>
+            </div>
+          </div>
+
+          <div class="tile">
+            <div class="tile-title">🔒 Datenschutz</div>
+            <p class="tile-text">
+              Adresse & Warenkorb werden nur lokal im Browser gespeichert (localStorage).
+              Keine Serverübertragung.
+            </p>
+            <div class="cta">
+              <a class="btn" href="datenschutz.html">Datenschutz ansehen</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
     <div class="footer">
-      <a href="impressum.html">Impressum</a> •
-      <a href="datenschutz.html">Datenschutz</a> •
-      <a href="agb.html">AGB</a>
+      © 2026 – AZUBI.OS (imaginär). <a href="agb.html">AGB</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="impressum.html">Impressum</a>
     </div>
+
   </div>
 
-  <script src="shop.js"></script>
-</body>
+  <!-- Global Binder: Warenkorb Badge + Add-to-cart Buttons -->
   <script type="module">
-  import { ensureProductInCart, updateCartBadge, toast } from "./shop.js";
-
-  // Bindet mehrere mögliche Button-IDs ab, damit nix mehr "defekt" ist.
-  const candidates = ["ctaGet", "buyBtn", "kaufenBtn", "checkoutBtn", "startTrialBtn", "ctaBuy"];
-  const btn = candidates.map(id => document.getElementById(id)).find(Boolean);
-
-  updateCartBadge();
-
-  if (btn) {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      ensureProductInCart();            // Produkt automatisch in den Warenkorb
-      updateCartBadge();
-      toast("✅ Im Warenkorb. Weiter geht’s zum Checkout.");
-      window.location.href = "checkout.html";
-    });
-  } else {
-    // Optional: in der Konsole sichtbar
-    console.warn("Kein Kaufbutton gefunden. Prüfe Button-ID in index.html.");
-  }
-</script>
+    import { updateCartBadge, bindAddToCartButtons } from "./shop.js";
+    updateCartBadge();
+    bindAddToCartButtons();
+  </script>
+</body>
 </html>
