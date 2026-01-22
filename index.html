@@ -69,4 +69,26 @@
 
   <script src="shop.js"></script>
 </body>
+  <script type="module">
+  import { ensureProductInCart, updateCartBadge, toast } from "./shop.js";
+
+  // Bindet mehrere mögliche Button-IDs ab, damit nix mehr "defekt" ist.
+  const candidates = ["ctaGet", "buyBtn", "kaufenBtn", "checkoutBtn", "startTrialBtn", "ctaBuy"];
+  const btn = candidates.map(id => document.getElementById(id)).find(Boolean);
+
+  updateCartBadge();
+
+  if (btn) {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      ensureProductInCart();            // Produkt automatisch in den Warenkorb
+      updateCartBadge();
+      toast("✅ Im Warenkorb. Weiter geht’s zum Checkout.");
+      window.location.href = "checkout.html";
+    });
+  } else {
+    // Optional: in der Konsole sichtbar
+    console.warn("Kein Kaufbutton gefunden. Prüfe Button-ID in index.html.");
+  }
+</script>
 </html>
