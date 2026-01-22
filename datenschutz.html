@@ -4,50 +4,92 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>AZUBI.OS – Datenschutz</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="index.html">
-      <span class="dot"></span><span class="brand-title">AZUBI.OS</span>
-      <span class="chip"><b>Projekt</b> Demo</span>
-    </a>
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="cart.html">Warenkorb</a>
-      <a href="impressum.html">Impressum</a>
-    </nav>
-    <a class="btn btn-primary" href="index.html">Shop</a>
-  </header>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <span>AZUBI.OS</span>
+        <span class="chip"><b>Legal</b> Datenschutz</span>
+      </div>
 
-  <main class="wrap">
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="cart.html" class="cart-link">Warenkorb <span class="cart-badge" id="cartCount">0</span></a>
+        <a href="agb.html">AGB</a>
+        <a href="impressum.html">Impressum</a>
+      </nav>
+
+      <a class="btn btn-primary" href="index.html#buy">Zurück</a>
+    </div>
+
     <section class="card section">
-      <h2>Datenschutz (Projekt/Demo)</h2>
-      <p class="mutedText">
-        Diese Website ist ein Demo-Shop. Es werden <b>keine Daten an einen Server gesendet</b>.
-        Optional speichern wir Eingaben lokal im Browser über <b>localStorage</b>.
+      <h2>Datenschutzerklärung (Demo / Schulprojekt)</h2>
+      <p>
+        Diese Website ist ein <b>Schulprojekt</b> (Demo-Shop) und verarbeitet keine echten Bestellungen.
+        Es wird <b>kein</b> Backend betrieben und <b>keine</b> Daten an einen Server gesendet.
       </p>
 
-      <div class="tile">
-        <h3>LocalStorage</h3>
-        <p>
-          Für Warenkorb, Rechnungsadresse und Bestellinfos nutzt die Seite localStorage.
-          Diese Daten bleiben auf deinem Gerät und können jederzeit gelöscht werden.
+      <div class="tile" style="border-radius:18px;">
+        <h3 style="margin:0 0 8px;">1. Verantwortlicher</h3>
+        <p style="margin:0; color:rgba(255,255,255,.72); line-height:1.6;">
+          Verantwortlich für diese Demo-Seite:<br>
+          <b>Jotham</b>, <b>Noah</b>, <b>Gérôme</b> (Projektteam AZUBI.OS)<br>
+          Kontakt: <i>Bitte im Impressum ergänzen</i>
         </p>
-
-        <h3>Wie lösche ich die Daten?</h3>
-        <p>
-          Browser → Einstellungen → Website-Daten löschen oder im Shop über “Warenkorb leeren”.
-        </p>
-
-        <h3>Keine echten Zahlungen</h3>
-        <p>Es gibt kein Payment-Gateway. Alle Preise sind fiktiv.</p>
       </div>
+
+      <div class="tile" style="border-radius:18px; margin-top:12px;">
+        <h3 style="margin:0 0 8px;">2. Welche Daten werden verarbeitet?</h3>
+        <p style="margin:0; color:rgba(255,255,255,.72); line-height:1.6;">
+          Der Demo-Checkout kann eine Rechnungsadresse abfragen. Diese Angaben werden – wenn aktiviert – nur
+          <b>lokal im Browser</b> über <b>localStorage</b> gespeichert, damit der Shop-Flow demonstrierbar ist.
+          Eine Übertragung an Server findet nicht statt.
+        </p>
+      </div>
+
+      <div class="tile" style="border-radius:18px; margin-top:12px;">
+        <h3 style="margin:0 0 8px;">3. localStorage (Browser-Speicher)</h3>
+        <p style="margin:0; color:rgba(255,255,255,.72); line-height:1.6;">
+          localStorage ist ein Speicherbereich im Browser. Er dient hier ausschließlich dazu,
+          Warenkorb/Adresse/Bestellung im Demo-Flow zu halten.
+          Du kannst die Daten jederzeit löschen:
+          Browser-Einstellungen → Website-Daten → Seite auswählen → Daten löschen.
+        </p>
+      </div>
+
+      <div class="tile" style="border-radius:18px; margin-top:12px;">
+        <h3 style="margin:0 0 8px;">4. Cookies / Tracking</h3>
+        <p style="margin:0; color:rgba(255,255,255,.72); line-height:1.6;">
+          Diese Demo-Seite nutzt keine Tracking-Cookies, kein Analytics und keine Werbe-Tracker.
+          (Wenn du später Analytics nutzt, musst du das hier ergänzen.)
+        </p>
+      </div>
+
+      <div class="tile" style="border-radius:18px; margin-top:12px;">
+        <h3 style="margin:0 0 8px;">5. Drittanbieter / GitHub Pages</h3>
+        <p style="margin:0; color:rgba(255,255,255,.72); line-height:1.6;">
+          Die Seite wird über <b>GitHub Pages</b> ausgeliefert. Dabei kann GitHub technisch notwendige
+          Zugriffsdaten (z.B. IP-Adresse, User-Agent) in Server-Logs verarbeiten.
+          Details findest du in den GitHub-Datenschutzinformationen.
+        </p>
+      </div>
+
+      <p class="mini" style="margin-top:14px;">
+        Hinweis: Diese Datenschutzerklärung ist eine <b>Projekt-/Demo-Vorlage</b> und keine Rechtsberatung.
+      </p>
     </section>
 
-    <footer class="footer">
-      <div>© 2026 AZUBI.OS • <a href="impressum.html">Impressum</a></div>
-    </footer>
-  </main>
+    <div class="footer">
+      © 2026 – AZUBI.OS (imaginär). <a href="agb.html">AGB</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="impressum.html">Impressum</a>
+    </div>
+  </div>
+
+  <script type="module">
+    import { updateCartBadge } from "./shop.js";
+    updateCartBadge();
+  </script>
 </body>
 </html>
