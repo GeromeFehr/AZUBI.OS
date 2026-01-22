@@ -143,6 +143,27 @@
 
     const $ = (id) => document.getElementById(id);
 
+    function normalizeCart() {
+  const cart = store.getCart();
+
+  // Map: id -> item (qty wird summiert)
+  const map = new Map();
+
+  for (const it of cart) {
+    if (!it?.id) continue;
+
+    const existing = map.get(it.id);
+    if (!existing) {
+      map.set(it.id, { ...it, qty: Math.max(1, Number(it.qty) || 1) });
+    } else {
+      existing.qty += Math.max(1, Number(it.qty) || 1);
+      map.set(it.id, existing);
+    }
+  }
+  const normalized = [...map.values()];
+  store.setCart(normalized);
+  return normalized;
+}    
     function render() {
       const cart = store.getCart();
       const count = cartCount(cart);
