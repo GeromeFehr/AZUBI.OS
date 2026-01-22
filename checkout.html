@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AZUBI.OS – Checkout</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <span class="dot"></span><span class="brand-title">AZUBI.OS</span>
+      <span class="chip"><b>IT25</b> Alpha Build</span>
+    </a>
+    <nav class="nav">
+      <a href="cart.html">Warenkorb</a>
+      <a href="index.html">Home</a>
+      <a class="cart-link" href="cart.html">Cart <span class="cart-badge" id="cartCount">0</span></a>
+    </nav>
+    <button class="btn btn-primary" onclick="location.href='cart.html'">Zurück</button>
+  </header>
+
+  <main class="wrap">
+    <section class="card section">
+      <h2>Checkout</h2>
+      <p>
+        Regel: <b>Erst Rechnungsadresse</b>, dann wird die <b>30 Tage Testversion</b> freigeschaltet.
+        (Demo-Flow, kein echtes Bezahlen)
+      </p>
+
+      <div class="splitCart">
+        <!-- LEFT -->
+        <div class="tile">
+          <div class="stepper">
+            <span class="step active" id="step1">1) Rechnungsadresse</span>
+            <span class="step" id="step2">2) Trial auswählen</span>
+            <span class="step" id="step3">3) Bestätigen</span>
+          </div>
+
+          <form id="billingForm" class="form">
+            <div>
+              <label>Vollständiger Name</label>
+              <input id="f_name" placeholder="z.B. Max Mustermann" autocomplete="name">
+            </div>
+
+            <div class="row2">
+              <div>
+                <label>Straße + Hausnr.</label>
+                <input id="f_street" placeholder="z.B. Beispielweg 7" autocomplete="street-address">
+              </div>
+              <div>
+                <label>PLZ</label>
+                <input id="f_zip" placeholder="z.B. 20095" inputmode="numeric">
+              </div>
+            </div>
+
+            <div class="row2">
+              <div>
+                <label>Stadt</label>
+                <input id="f_city" placeholder="z.B. Hamburg" autocomplete="address-level2">
+              </div>
+              <div>
+                <label>Land</label>
+                <select id="f_country">
+                  <option value="DE" selected>Deutschland</option>
+                  <option value="AT">Österreich</option>
+                  <option value="CH">Schweiz</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label>E-Mail (für Trial-Link)</label>
+              <input id="f_email" placeholder="z.B. you@domain.de" inputmode="email" autocomplete="email">
+            </div>
+
+            <div class="err" id="addrErr">Bitte fülle alle Felder korrekt aus.</div>
+
+            <div class="cta">
+              <button type="button" class="btn btn-primary" id="saveAddressBtn">Adresse speichern</button>
+              <a class="btn" href="cart.html">Abbrechen</a>
+            </div>
+
+            <p class="mini">Wir speichern (Demo) optional lokal im Browser (localStorage) – kein Server.</p>
+          </form>
+
+          <div id="trialPanel" style="display:none; margin-top:14px;">
+            <h3 style="margin:0 0 8px;">✅ Testversion freigeschaltet</h3>
+            <p style="margin:0 0 12px; color:var(--muted);">Adresse ok. Wähle jetzt deine Trial-Option.</p>
+
+            <div class="trialGrid">
+              <label class="trialCard">
+                <input type="radio" name="trial" value="trial30" checked>
+                <div>
+                  <b>30 Tage gratis</b>
+                  <div class="muted">Standard Trial • Heute: € 0,00</div>
+                </div>
+              </label>
+
+              <label class="trialCard">
+                <input type="radio" name="trial" value="trial30_plus">
+                <div>
+                  <b>30 Tage + “TD95 Boost”</b>
+                  <div class="muted">extra Fun • Heute: € 0,00</div>
+                </div>
+              </label>
+            </div>
+
+            <div class="cta" style="margin-top:12px;">
+              <button class="btn btn-primary" id="confirmBtn" type="button">Bestellung bestätigen</button>
+              <button class="btn" id="editAddrBtn" type="button">Adresse bearbeiten</button>
+            </div>
+
+            <div class="ok" id="confirmOk">Bestätigt! Weiterleitung…</div>
+          </div>
+        </div>
+
+        <!-- RIGHT -->
+        <div class="tile">
+          <h3 style="margin-top:0;">Zusammenfassung</h3>
+          <div id="checkoutSummary"></div>
+
+          <div class="sum" style="margin-top:12px;">
+            <div class="sumRow"><span>Zwischensumme</span><b id="subtotal">€ 0,00</b></div>
+            <div class="sumRow"><span>Trial</span><b>€ 0,00</b></div>
+            <div class="line2"></div>
+            <div class="sumRow big"><span>Heute fällig</span><b>€ 0,00</b></div>
+          </div>
+
+          <p class="mini">
+            In einem echten Shop würde hier ein Backend: Zahlung, Rechnung, Lizenz & E-Mail übernehmen.
+            Wir simulieren das sauber im Frontend.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>© 2026 AZUBI.OS • <a href="datenschutz.html">Datenschutz</a> • <a href="impressum.html">Impressum</a></div>
+    </footer>
+  </main>
+
+  <script src="js/shop.js"></script>
+  <script>
+    Shop.renderCheckoutPage();
+
+    document.getElementById("saveAddressBtn").addEventListener("click", () => {
+      const ok = Shop.saveBillingFromForm();
+      if (ok) Shop.unlockTrialUI();
+    });
+
+    document.getElementById("editAddrBtn")?.addEventListener("click", () => Shop.editAddress());
+
+    document.getElementById("confirmBtn")?.addEventListener("click", () => {
+      Shop.confirmOrderAndGoSuccess();
+    });
+  </script>
+</body>
+</html>
