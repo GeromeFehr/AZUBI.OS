@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AZUBI.OS – Danke!</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="index.html">
+      <span class="dot"></span><span class="brand-title">AZUBI.OS</span>
+      <span class="chip"><b>IT25</b> Alpha Build</span>
+    </a>
+    <nav class="nav">
+      <a href="index.html">Home</a>
+      <a href="cart.html">Warenkorb</a>
+      <a href="impressum.html">Impressum</a>
+    </nav>
+    <button class="btn btn-primary" onclick="location.href='index.html'">Zurück zum Shop</button>
+  </header>
+
+  <main class="wrap">
+    <section class="card section">
+      <h2>✅ Danke! Deine Testversion ist bereit.</h2>
+      <p class="mutedText">
+        Bestellung (Demo) erfolgreich. Du bekommst jetzt die <b>30 Tage Gratis-Testversion</b>.
+      </p>
+
+      <div class="splitCart">
+        <div class="tile">
+          <h3 style="margin-top:0;">Bestelldetails</h3>
+          <div id="orderBox" class="orderBox"></div>
+
+          <div class="cta" style="margin-top:12px;">
+            <button class="btn btn-primary" id="startTrialBtn">Trial starten</button>
+            <button class="btn" id="invoiceBtn">Rechnung drucken (Demo)</button>
+          </div>
+
+          <div class="ok" id="trialOk">🎉 Trial gestartet! (Demo) – Link/Key wurde simuliert.</div>
+
+          <p class="mini">Pro-Tipp für die Präsentation: erklären, dass “Rechnung drucken” über Browser Print geht.</p>
+        </div>
+
+        <div class="tile">
+          <h3 style="margin-top:0;">Was passiert jetzt?</h3>
+          <ul class="bullets">
+            <li>Trial ist freigeschaltet, weil eine Rechnungsadresse vorhanden ist.</li>
+            <li>Wir speichern (Demo) Bestellnummer + Adresse lokal.</li>
+            <li>In echt würde hier ein Backend die Lizenz erzeugen und eine E-Mail senden.</li>
+            <li>TD95-Easteregg ist aktiv. 😉</li>
+          </ul>
+          <div class="line"></div>
+          <p class="mini"><b>Hinweis:</b> Keine echten Zahlungen, kein echtes Produkt – nur Shop-Flow für das Projekt.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>© 2026 AZUBI.OS • <a href="datenschutz.html">Datenschutz</a> • <a href="impressum.html">Impressum</a></div>
+    </footer>
+  </main>
+
+  <script src="js/shop.js"></script>
+  <script>
+    Shop.renderSuccessPage();
+
+    document.getElementById("startTrialBtn").addEventListener("click", () => Shop.startTrial());
+    document.getElementById("invoiceBtn").addEventListener("click", () => Shop.printInvoiceDemo());
+  </script>
+</body>
+</html>
