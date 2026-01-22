@@ -4,48 +4,67 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>AZUBI.OS – Impressum</title>
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="topbar">
-    <a class="brand" href="index.html">
-      <span class="dot"></span><span class="brand-title">AZUBI.OS</span>
-      <span class="chip"><b>Projekt</b> Demo</span>
-    </a>
-    <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="cart.html">Warenkorb</a>
-      <a href="datenschutz.html">Datenschutz</a>
-    </nav>
-    <a class="btn btn-primary" href="index.html">Shop</a>
-  </header>
-
-  <main class="wrap">
-    <section class="card section">
-      <h2>Impressum (Projekt/Demo)</h2>
-      <p class="mutedText">
-        Diese Website ist Teil eines Schul-/Ausbildungsprojekts und stellt einen <b>fiktiven Demo-Shop</b> dar.
-        Es findet <b>kein echter Verkauf</b> statt.
-      </p>
-
-      <div class="tile">
-        <h3>Verantwortliche (Projektteam)</h3>
-        <p><b>AZUBI.OS – Projektteam</b><br>
-          Jotham • Noah • Gérôme<br>
-          (Demo/Schulprojekt, keine reale Firma)
-        </p>
-
-        <h3>Kontakt</h3>
-        <p>Kontakt: (Projektintern, in Präsentation nennen oder leer lassen)</p>
-
-        <h3>Haftungshinweis</h3>
-        <p>Alle Inhalte sind fiktiv. Marken/Produkte sind nicht real. Keine Gewähr für Aktualität/Vollständigkeit.</p>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <span>AZUBI.OS</span>
+        <span class="chip"><b>Legal</b> Impressum</span>
       </div>
+
+      <nav class="nav">
+        <a href="index.html">Home</a>
+        <a href="cart.html" class="cart-link">Warenkorb <span class="cart-badge" id="cartCount">0</span></a>
+        <a href="agb.html">AGB</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+
+      <a class="btn btn-primary" href="index.html">Zurück</a>
+    </div>
+
+    <section class="card section">
+      <h2>Impressum (Demo / Schulprojekt)</h2>
+
+      <div class="tile" style="border-radius:18px;">
+        <h3 style="margin:0 0 8px;">Projekt</h3>
+        <p style="margin:0; color:rgba(255,255,255,.72); line-height:1.6;">
+          <b>AZUBI.OS</b> – Demo-Shop / Projektseite (kein echter Verkauf).<br>
+          Erstellt von: <b>Jotham</b>, <b>Noah</b>, <b>Gérôme</b>
+        </p>
+      </div>
+
+      <div class="tile" style="border-radius:18px; margin-top:12px;">
+        <h3 style="margin:0 0 8px;">Kontakt</h3>
+        <p style="margin:0; color:rgba(255,255,255,.72); line-height:1.6;">
+          E-Mail: <i>hier eure Projekt-Mail eintragen</i><br>
+          (Optional) Schule / Kurs / Klasse: <i>eintragen</i>
+        </p>
+      </div>
+
+      <div class="tile" style="border-radius:18px; margin-top:12px;">
+        <h3 style="margin:0 0 8px;">Haftungshinweis</h3>
+        <p style="margin:0; color:rgba(255,255,255,.72); line-height:1.6;">
+          Dies ist ein Schulprojekt. Inhalte und Funktionen dienen der Demonstration.
+          Es besteht kein Anspruch auf Vollständigkeit oder dauerhafte Verfügbarkeit.
+        </p>
+      </div>
+
+      <p class="mini" style="margin-top:14px;">
+        Hinweis: Für eine echte, öffentliche Website müssen Impressumspflichten individuell geprüft werden.
+      </p>
     </section>
 
-    <footer class="footer">
-      <div>© 2026 AZUBI.OS • <a href="datenschutz.html">Datenschutz</a></div>
-    </footer>
-  </main>
+    <div class="footer">
+      © 2026 – AZUBI.OS (imaginär). <a href="agb.html">AGB</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="impressum.html">Impressum</a>
+    </div>
+  </div>
+
+  <script type="module">
+    import { updateCartBadge } from "./shop.js";
+    updateCartBadge();
+  </script>
 </body>
 </html>
