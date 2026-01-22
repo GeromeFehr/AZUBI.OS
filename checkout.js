@@ -83,24 +83,20 @@ function goSuccess(orderId) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Guard: checkout needs a cart item
   ensureProductInCart();
   updateCartBadge();
   renderSummary();
 
-  // if billing exists -> start at review, else address
   setStep(store.getBilling() ? "review" : "address");
 
-  // Prevent any form accidental reloads
-  $$("form").forEach((f) => f.addEventListener("submit", (e) => e.preventDefault()));
-
-  $("#saveAddressBtn").addEventListener("click", (e) => {
+  // Guarded bindings -> kein Crash wenn IDs fehlen
+  $("#saveAddressBtn")?.addEventListener("click", (e) => {
     e.preventDefault();
-    $("#addrErr").classList.remove("show");
+    $("#addrErr")?.classList.remove("show");
 
     const b = readForm();
     if (!validateBilling(b)) {
-      $("#addrErr").classList.add("show");
+      $("#addrErr")?.classList.add("show");
       return;
     }
 
@@ -110,12 +106,12 @@ document.addEventListener("DOMContentLoaded", () => {
     setStep("review");
   });
 
-  $("#editAddressBtn").addEventListener("click", (e) => {
+  $("#editAddressBtn")?.addEventListener("click", (e) => {
     e.preventDefault();
     setStep("address");
   });
 
-  $("#startTrialBtn").addEventListener("click", (e) => {
+  $("#startTrialBtn")?.addEventListener("click", (e) => {
     e.preventDefault();
 
     if (!store.getBilling()) {
