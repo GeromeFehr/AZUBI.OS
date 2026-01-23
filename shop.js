@@ -159,16 +159,23 @@ export function updateCartBadge() {
 // Bindet automatisch jeden Button mit data-add-to-cart
 export function bindAddToCartButtons() {
   const btns = [...document.querySelectorAll("[data-add-to-cart]")];
+
   btns.forEach((btn) => {
-    // Doppelt binden verhindern
+    // verhindert doppelte Event-Bindings
     if (btn.dataset.bound === "1") return;
     btn.dataset.bound = "1";
 
     btn.addEventListener("click", (e) => {
       e.preventDefault();
+
       cartAdd(PRODUCT, 1);
       updateCartBadge();
       toast("✅ In den Warenkorb gelegt.");
+
+      // Optional: direkt in den Warenkorb leiten
+      if (btn.hasAttribute("data-go-cart")) {
+        window.location.href = "cart.html";
+      }
     });
   });
 }
