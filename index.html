@@ -5,157 +5,240 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>AZUBI.OS – Offizieller Shop</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ====== Minimal extra CSS nur für Premium Layout (keine neue Datei) ====== */
+    :root{
+      --bg0:#05040a;
+      --bg1:#0b0712;
+      --card: rgba(255,255,255,.06);
+      --line: rgba(255,255,255,.12);
+      --muted: rgba(255,255,255,.72);
+      --muted2: rgba(255,255,255,.58);
+      --glow1: rgba(255,110,227,.45);
+      --glow2: rgba(170,110,255,.38);
+    }
+    body{ background: radial-gradient(1200px 700px at 70% 10%, rgba(255,110,227,.18), transparent 60%),
+                   radial-gradient(900px 600px at 20% 35%, rgba(170,110,255,.16), transparent 55%),
+                   linear-gradient(180deg, var(--bg0), var(--bg1)); }
+    .wrap{ max-width:1100px; margin:0 auto; padding:22px 16px 44px; }
+    .topbar{
+      position:sticky; top:0; z-index:50;
+      display:flex; align-items:center; justify-content:space-between; gap:14px;
+      padding:12px 14px; margin:0 auto 18px;
+      border-radius:18px;
+      background: rgba(10,8,18,.55);
+      backdrop-filter: blur(10px);
+      border:1px solid var(--line);
+    }
+    .brand{ display:flex; align-items:center; gap:10px; font-weight:950; letter-spacing:.3px; }
+    .dot{ width:10px; height:10px; border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, #fff, #ff6ee3 45%, #7a4cff 95%);
+      box-shadow: 0 0 24px rgba(255,110,227,.45);
+    }
+    .chip{
+      font-weight:900; font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid var(--line); background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.82);
+    }
+    .nav{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+    .nav a{ color: rgba(255,255,255,.78); text-decoration:none; font-weight:800; font-size:13px; }
+    .nav a:hover{ color:#fff; }
+    .cart-link{ display:flex; gap:8px; align-items:center; }
+    .cart-badge{
+      min-width:22px; height:22px; display:inline-flex; align-items:center; justify-content:center;
+      border-radius:999px; border:1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      font-weight:950; font-size:12px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px; border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.90);
+      text-decoration:none; font-weight:950; font-size:13px;
+      transition: transform .08s ease, background .2s ease, border .2s ease;
+      cursor:pointer;
+    }
+    .btn:hover{ background: rgba(255,255,255,.08); }
+    .btn:active{ transform: translateY(1px); }
+    .btn-primary{
+      border-color: rgba(255,110,227,.35);
+      background: radial-gradient(120% 140% at 30% 20%, rgba(255,110,227,.30), rgba(122,76,255,.18));
+      box-shadow: 0 18px 60px rgba(0,0,0,.45), 0 0 40px rgba(255,110,227,.10);
+    }
+
+    /* Hero */
+    .hero{
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:22px;
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.03));
+      box-shadow: 0 18px 80px rgba(0,0,0,.55);
+    }
+    .hero-grid{ display:grid; grid-template-columns: 1.05fr .95fr; gap:18px; align-items:center; }
+    @media (max-width: 900px){ .hero-grid{ grid-template-columns: 1fr; } }
+    .kicker{
+      display:inline-flex; gap:8px; align-items:center;
+      font-weight:950; font-size:12px; color: rgba(255,255,255,.84);
+      padding:6px 10px; border-radius:999px;
+      background: rgba(255,255,255,.06); border:1px solid var(--line);
+    }
+    h1{ margin:10px 0 10px; font-size:44px; line-height:1.04; letter-spacing:-.5px; }
+    .lead{ margin:0; color: var(--muted); line-height:1.6; max-width:54ch; }
+    .cta{ display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+
+    /* Product frame: removes “white box” feeling via vignette + border + glow */
+    .product-shell{
+      position:relative;
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:
+        radial-gradient(900px 600px at 50% 30%, rgba(255,110,227,.14), transparent 60%),
+        radial-gradient(700px 500px at 60% 60%, rgba(170,110,255,.12), transparent 55%),
+        rgba(255,255,255,.03);
+      padding:16px;
+      overflow:hidden;
+    }
+    .product-shell::before{
+      content:"";
+      position:absolute; inset:-40px;
+      background: radial-gradient(closest-side at 55% 40%, rgba(255,110,227,.20), transparent 60%);
+      filter: blur(16px);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .product-media{
+      position:relative;
+      display:grid; place-items:center;
+      border-radius:18px;
+      background: radial-gradient(120% 120% at 40% 30%, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.10);
+      padding:16px;
+    }
+    .product-media img{
+      width: 100%;
+      max-width: 360px;
+      height:auto;
+      display:block;
+      filter: drop-shadow(0 26px 60px rgba(0,0,0,.55));
+      /* “White edge” weniger hart wirken lassen */
+      mix-blend-mode: screen;
+      opacity: .98;
+    }
+    .product-meta{
+      position:relative; margin-top:12px;
+      display:flex; justify-content:space-between; gap:10px; align-items:flex-end;
+    }
+    .price{ font-size:34px; font-weight:950; letter-spacing:-.3px; }
+    .sub{ color: var(--muted2); font-weight:800; font-size:13px; }
+
+    /* Features condensed */
+    .section{ margin-top:18px; }
+    .grid3{ display:grid; grid-template-columns: repeat(3, 1fr); gap:12px; }
+    @media (max-width: 900px){ .grid3{ grid-template-columns: 1fr; } }
+    .tile{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:14px;
+      background: rgba(255,255,255,.04);
+    }
+    .tile-title{ font-weight:950; margin-bottom:6px; }
+    .tile-text{ margin:0; color: var(--muted); line-height:1.55; }
+
+    .footer{
+      margin-top:22px; padding:14px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      background: rgba(255,255,255,.03);
+      color: rgba(255,255,255,.62);
+      font-weight:800; font-size:12px;
+    }
+    .footer a{ color: rgba(255,255,255,.78); text-decoration:none; }
+    .footer a:hover{ color:#fff; }
+
+    /* Tiny: keep it premium */
+    .mini{ margin-top:10px; color: rgba(255,255,255,.55); font-size:12px; font-weight:800; }
+  </style>
 </head>
 <body>
   <div class="wrap">
 
-    <!-- TOPBAR -->
     <div class="topbar">
       <div class="brand">
         <span class="dot" aria-hidden="true"></span>
         <span>AZUBI.OS</span>
-        <span class="chip"><b>IT25</b> Alpha Shop</span>
+        <span class="chip">Alpha Shop</span>
       </div>
 
       <nav class="nav">
         <a href="#features">Features</a>
-        <a href="#buy">Jetzt holen</a>
-        <a href="agb.html">AGB</a>
-        <a href="datenschutz.html">Datenschutz</a>
-        <a href="impressum.html">Impressum</a>
-        <a href="cart.html" class="cart-link">
-          Warenkorb <span class="cart-badge" id="cartCount">0</span>
-        </a>
+        <a href="#pricing">Preis</a>
+        <a href="cart.html" class="cart-link">Warenkorb <span class="cart-badge" id="cartCount">0</span></a>
       </nav>
 
-      <a class="btn btn-primary" href="#buy">Shop</a>
+      <a class="btn btn-primary" href="#pricing">Jetzt holen</a>
     </div>
 
     <!-- HERO -->
-    <section class="hero card section">
+    <section class="hero">
       <div class="hero-grid">
         <div>
-          <div class="badge">✨ Pink/Glow UI • Fokus • Ordnung • Progress</div>
+          <span class="kicker">✨ Pink/Glow • Fokus • Ordnung</span>
           <h1>AZUBI.OS</h1>
           <p class="lead">
-            Das imaginäre Betriebssystem für Azubis: <b>Workflow</b>, <b>Tools</b> und <b>Focus Mode</b> – alles in einem.
-            Perfekt für eure Projekt-Präsentation: Shop-Flow, Warenkorb, Checkout und 30 Tage Testversion.
+            Ein imaginäres Betriebssystem als Demo-Produkt – gebaut für euren Projekt-Pitch:
+            <b>Warenkorb</b>, <b>Checkout</b> und <b>30-Tage-Testversion</b> (ohne Backend).
           </p>
 
           <div class="cta">
-            <!-- Wichtig: data-add-to-cart bindet automatisch den Warenkorb -->
-            <a class="btn btn-primary" href="#" data-add-to-cart>Jetzt holen</a>
-            <a class="btn" href="#features">Features ansehen</a>
+            <a class="btn btn-primary" href="#" data-add-to-cart>In den Warenkorb</a>
             <a class="btn" href="cart.html">Zum Warenkorb</a>
           </div>
 
-          <p class="mini">
-            Built by Jotham • Noah • Gérôme — Easteregg: <b>TD95 approved</b> 😏
-          </p>
+          <div class="mini">by Jotham • Noah • Gérôme — TD95 certified 😏</div>
         </div>
 
-        <div class="hero-product">
-          <div class="product-frame">
+        <div class="product-shell">
+          <div class="product-media">
             <img src="azubios-box.png" alt="AZUBI.OS Produktbox" />
+          </div>
+
+          <div class="product-meta" id="pricing">
+            <div>
+              <div class="price">€ 29,95</div>
+              <div class="sub">Einmalig • “Alpha Build” Lizenz (Demo)</div>
+            </div>
+            <a class="btn btn-primary" href="#" data-add-to-cart>Jetzt holen</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FEATURES -->
-    <section id="features" class="card section">
-      <h2>Features</h2>
-
+    <!-- FEATURES (short, clean) -->
+    <section id="features" class="section">
       <div class="grid3">
         <div class="tile">
           <div class="tile-title">🚀 Fokus Workflow</div>
-          <p class="tile-text">Minimalistisch, aber tough. Kein Overload – nur die wichtigsten Schritte für strukturierte Arbeit.</p>
+          <p class="tile-text">Minimalistisch, aber tough. Der Flow bleibt erklärbar und clean.</p>
         </div>
-
         <div class="tile">
-          <div class="tile-title">🧠 Lern-Boost</div>
-          <p class="tile-text">Shop-Flow ideal zum Präsentieren: Warenkorb, Checkout, Adresseingabe, Review und Trial-Start.</p>
+          <div class="tile-title">🧾 Checkout-Ready</div>
+          <p class="tile-text">Rechnungsadresse → Review → Trial-Key → Success. Wie im echten Shop.</p>
         </div>
-
         <div class="tile">
-          <div class="tile-title">💿 Alpha Build Lizenz</div>
-          <p class="tile-text">Imaginäres Produkt mit “Lizenz-Key” und Success-Page. Sieht aus wie ein echter Store.</p>
+          <div class="tile-title">🔒 localStorage only</div>
+          <p class="tile-text">Keine Server. Nur Browser-Speicher. Perfekt für GitHub Pages.</p>
         </div>
       </div>
     </section>
 
-    <!-- BUY -->
-    <section id="buy" class="card section">
-      <h2>Hol dir AZUBI.OS</h2>
-
-      <div class="buy-grid">
-        <div class="buy-left">
-          <div class="product-card">
-            <div class="product-img">
-              <img src="azubios-box.png" alt="AZUBI.OS Box" />
-            </div>
-
-            <div class="product-info">
-              <div class="price-row">
-                <div class="price">€ 29,95</div>
-                <div class="pill"><span class="star">★</span> Bestseller</div>
-              </div>
-
-              <div class="subtitle">Einmalig • “Alpha Build” Lizenz</div>
-
-              <ul class="bullets">
-                <li>Premium UI-Feeling (Pink/Glow)</li>
-                <li>Azubi-Workflow: Fokus, Ordnung, Progress</li>
-                <li>TD95-Easteregg inklusive (damit er grinst)</li>
-              </ul>
-
-              <div class="cta">
-                <a class="btn btn-primary" href="#" data-add-to-cart>In den Warenkorb</a>
-                <a class="btn" href="checkout.html">Direkt zum Checkout</a>
-              </div>
-
-              <p class="mini">
-                Hinweis: Demo-Shop (Schulprojekt), kein echtes Payment.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <div class="buy-right">
-          <div class="tile">
-            <div class="tile-title">✅ 30 Tage Testversion</div>
-            <p class="tile-text">
-              Du bekommst die Testversion erst nach Eingabe einer Rechnungsadresse.
-              Genau wie im echten Shop – nur ohne Backend.
-            </p>
-            <div class="cta">
-              <a class="btn btn-primary" href="checkout.html">Test starten</a>
-              <a class="btn" href="cart.html">Warenkorb prüfen</a>
-            </div>
-          </div>
-
-          <div class="tile">
-            <div class="tile-title">🔒 Datenschutz</div>
-            <p class="tile-text">
-              Adresse & Warenkorb werden nur lokal im Browser gespeichert (localStorage).
-              Keine Serverübertragung.
-            </p>
-            <div class="cta">
-              <a class="btn" href="datenschutz.html">Datenschutz ansehen</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
     <div class="footer">
       © 2026 – AZUBI.OS (imaginär). <a href="agb.html">AGB</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="impressum.html">Impressum</a>
     </div>
 
   </div>
 
-  <!-- Global Binder: Warenkorb Badge + Add-to-cart Buttons -->
   <script type="module">
     import { updateCartBadge, bindAddToCartButtons } from "./shop.js";
     updateCartBadge();
