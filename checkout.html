@@ -5,6 +5,36 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>AZUBI.OS – Checkout</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    .wrap{max-width:1100px;margin:0 auto;padding:22px 16px 44px;}
+    .topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:14px;padding:12px 14px;border-radius:18px;background:rgba(10,8,18,.55);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.12);}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:950;}
+    .dot{width:10px;height:10px;border-radius:999px;background:radial-gradient(circle at 30% 30%, #fff, #ff6ee3 45%, #7a4cff 95%);box-shadow:0 0 24px rgba(255,110,227,.45);}
+    .nav{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+    .nav a{color:rgba(255,255,255,.78);text-decoration:none;font-weight:900;font-size:13px;}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:10px 14px;border-radius:14px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.06);color:rgba(255,255,255,.9);text-decoration:none;font-weight:950;font-size:13px;cursor:pointer;}
+    .btn-primary{border-color:rgba(255,110,227,.35);background:radial-gradient(120% 140% at 30% 20%, rgba(255,110,227,.30), rgba(122,76,255,.18));}
+    .card{border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);border-radius:22px;padding:18px;}
+    .grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:14px;align-items:start;}
+    @media (max-width:900px){.grid{grid-template-columns:1fr;}}
+    .muted{color:rgba(255,255,255,.72);line-height:1.6;}
+    .stepper{display:flex;gap:10px;margin-bottom:12px;flex-wrap:wrap;}
+    .step{padding:8px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);font-weight:950;font-size:12px;color:rgba(255,255,255,.78);}
+    .step.active{border-color:rgba(255,110,227,.35);color:#fff;}
+    .sumrow{display:flex;justify-content:space-between;gap:10px;margin:6px 0;}
+    .line{height:1px;background:rgba(255,255,255,.12);margin:10px 0;}
+    label{display:block;font-weight:950;margin:10px 0 6px;}
+    input,select{
+      width:100%;padding:11px 12px;border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      color:#fff;outline:none;
+    }
+    .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    @media (max-width:520px){.row2{grid-template-columns:1fr;}}
+    .err{display:none;margin-top:10px;padding:10px 12px;border-radius:14px;border:1px solid rgba(255,120,120,.35);background:rgba(255,120,120,.10);color:#fff;font-weight:900;}
+    .err.show{display:block;}
+  </style>
 </head>
 <body>
   <div class="wrap">
@@ -13,133 +43,109 @@
       <div class="brand">
         <span class="dot" aria-hidden="true"></span>
         <span>AZUBI.OS</span>
-        <span class="chip"><b>IT25</b> Checkout</span>
       </div>
-
       <nav class="nav">
         <a href="index.html">Home</a>
         <a href="cart.html">Warenkorb <span class="cart-badge" id="cartCount">0</span></a>
-        <a href="agb.html">AGB</a>
-        <a href="datenschutz.html">Datenschutz</a>
-        <a href="impressum.html">Impressum</a>
       </nav>
-
-      <a class="btn btn-primary" href="cart.html">Zurück</a>
+      <a class="btn" href="cart.html">Zurück</a>
     </div>
 
-    <section class="card section">
-      <h2>Checkout – 30 Tage Testversion</h2>
-      <p>Erst Rechnungsadresse, dann bekommst du die <b>Testversion</b>. (Demo, kein echtes Payment)</p>
+    <section class="card">
+      <h2 style="margin:0 0 6px;">Checkout</h2>
+      <p class="muted" style="margin:0 0 14px;">Rechnungsadresse → Review → 30-Tage-Trial (Demo)</p>
 
-      <div class="modal-card" style="margin-top:14px;">
-        <div class="modal-body">
-          <div class="pane">
-            <div class="stepper">
-              <span class="step active" id="stepA">1) Rechnungsadresse</span>
-              <span class="step" id="stepB">2) Review & Start</span>
-            </div>
-
-            <div class="sum">
-              <div style="display:flex; justify-content:space-between;">
-                <span>Rechnungsadresse</span><b id="addrStatus">❌ fehlt</b>
-              </div>
-              <div style="display:flex; justify-content:space-between;">
-                <span>Testversion</span><b>30 Tage</b>
-              </div>
-              <div class="line2"></div>
-              <div style="display:flex; justify-content:space-between;">
-                <span>Zwischensumme</span><b id="subtotal">€ 0,00</b>
-              </div>
-              <div style="display:flex; justify-content:space-between; font-size:16px;">
-                <span>Heute fällig</span><b id="dueToday">€ 0,00</b>
-              </div>
-            </div>
-
-            <p class="hint">Pro-Tipp: Flow ist absichtlich wie ein echter Shop – nur ohne Backend.</p>
+      <div class="grid">
+        <!-- LEFT: SUMMARY -->
+        <div class="card">
+          <div class="stepper">
+            <span class="step active" id="stepA">1) Adresse</span>
+            <span class="step" id="stepB">2) Review</span>
           </div>
 
-          <div class="pane">
-            <!-- STEP 1 -->
-            <div id="panelAddress">
-              <h3 style="margin:0 0 8px;">Rechnungsadresse</h3>
-              <p style="margin:0 0 12px; color:var(--muted);">Bitte vollständig ausfüllen.</p>
+          <div class="sumrow"><span class="muted">Adresse</span><b id="addrStatus">❌ fehlt</b></div>
+          <div class="sumrow"><span class="muted">Testversion</span><b>30 Tage</b></div>
+          <div class="line"></div>
+          <div class="sumrow"><span class="muted">Zwischensumme</span><b id="subtotal">€ 0,00</b></div>
+          <div class="sumrow" style="font-size:16px;"><span class="muted">Heute fällig</span><b id="dueToday">€ 0,00</b></div>
 
-              <form class="form">
-                <div>
-                  <label>Vollständiger Name</label>
-                  <input id="f_name" placeholder="z.B. Max Mustermann" autocomplete="name" />
-                </div>
+          <p class="muted" style="margin-top:12px;font-size:12px;">
+            Hinweis: Daten bleiben lokal im Browser (localStorage). Kein echtes Payment.
+          </p>
+        </div>
 
-                <div class="row2">
-                  <div>
-                    <label>Straße + Hausnr.</label>
-                    <input id="f_street" placeholder="z.B. Beispielweg 7" autocomplete="street-address" />
-                  </div>
-                  <div>
-                    <label>PLZ</label>
-                    <input id="f_zip" placeholder="z.B. 20095" inputmode="numeric" />
-                  </div>
-                </div>
+        <!-- RIGHT: PANELS -->
+        <div class="card">
+          <!-- ADDRESS -->
+          <div id="panelAddress">
+            <h3 style="margin:0 0 8px;">Rechnungsadresse</h3>
 
-                <div class="row2">
-                  <div>
-                    <label>Stadt</label>
-                    <input id="f_city" placeholder="z.B. Hamburg" autocomplete="address-level2" />
-                  </div>
-                  <div>
-                    <label>Land</label>
-                    <select id="f_country">
-                      <option value="DE" selected>Deutschland</option>
-                      <option value="AT">Österreich</option>
-                      <option value="CH">Schweiz</option>
-                    </select>
-                  </div>
-                </div>
+            <label>Vollständiger Name</label>
+            <input id="f_name" placeholder="Max Mustermann" autocomplete="name" />
 
-                <div>
-                  <label>E-Mail (für Trial-Link)</label>
-                  <input id="f_email" placeholder="z.B. you@domain.de" inputmode="email" autocomplete="email" />
-                </div>
-
-                <div class="err" id="addrErr">Bitte fülle alle Felder korrekt aus.</div>
-
-                <div class="cta" style="margin-top: 6px;">
-                  <button class="btn btn-primary" id="saveAddressBtn" type="button">Adresse speichern</button>
-                  <a class="btn" href="cart.html">Abbrechen</a>
-                </div>
-              </form>
+            <div class="row2">
+              <div>
+                <label>Straße + Hausnr.</label>
+                <input id="f_street" placeholder="Beispielweg 7" autocomplete="street-address" />
+              </div>
+              <div>
+                <label>PLZ</label>
+                <input id="f_zip" placeholder="20095" inputmode="numeric" />
+              </div>
             </div>
 
-            <!-- STEP 2 -->
-            <div id="panelReview" style="display:none;">
-              <h3 style="margin:0 0 8px;">Review & Testversion starten</h3>
-              <p style="margin:0 0 12px; color:var(--muted);">
-                Adresse ist gesetzt – du kannst jetzt starten.
-              </p>
-
-              <div class="tile" style="border-radius:18px;">
-                <div style="font-weight:950; margin-bottom:6px;">Rechnungsadresse</div>
-                <div id="addrPreview" style="color:rgba(255,255,255,.78); line-height:1.45;"></div>
-                <div class="cta" style="margin-top:10px;">
-                  <button class="btn" id="editAddressBtn" type="button">Bearbeiten</button>
-                </div>
+            <div class="row2">
+              <div>
+                <label>Stadt</label>
+                <input id="f_city" placeholder="Hamburg" autocomplete="address-level2" />
               </div>
-
-              <div class="cta" style="margin-top: 12px;">
-                <button class="btn btn-primary" id="startTrialBtn" type="button">30 Tage Test starten</button>
-                <a class="btn" href="cart.html">Zum Warenkorb</a>
+              <div>
+                <label>Land</label>
+                <select id="f_country">
+                  <option value="DE" selected>Deutschland</option>
+                  <option value="AT">Österreich</option>
+                  <option value="CH">Schweiz</option>
+                </select>
               </div>
-
-              <p class="mini">Demo: Keine echte Zahlung, kein echter Versand. Nur Shop-Flow.</p>
             </div>
 
+            <label>E-Mail</label>
+            <input id="f_email" placeholder="you@domain.de" inputmode="email" autocomplete="email" />
+
+            <div class="err" id="addrErr">Bitte fülle alle Felder korrekt aus.</div>
+
+            <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+              <button class="btn btn-primary" id="saveAddressBtn" type="button">Speichern</button>
+              <a class="btn" href="cart.html">Abbrechen</a>
+            </div>
+          </div>
+
+          <!-- REVIEW -->
+          <div id="panelReview" style="display:none;">
+            <h3 style="margin:0 0 8px;">Review</h3>
+            <p class="muted" style="margin:0 0 10px;">Adresse gespeichert. Du kannst den Trial starten.</p>
+
+            <div class="card" style="padding:14px;">
+              <b>Rechnungsadresse</b>
+              <div id="addrPreview" class="muted" style="margin-top:6px;"></div>
+              <div style="margin-top:10px;">
+                <button class="btn" id="editAddressBtn" type="button">Bearbeiten</button>
+              </div>
+            </div>
+
+            <div style="margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;">
+              <button class="btn btn-primary" id="startTrialBtn" type="button">30 Tage Trial starten</button>
+              <a class="btn" href="cart.html">Zum Warenkorb</a>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <div class="footer">
-      © 2026 – AZUBI.OS (imaginär). <a href="agb.html">AGB</a> · <a href="datenschutz.html">Datenschutz</a> · <a href="impressum.html">Impressum</a>
+    <div style="margin-top:14px;color:rgba(255,255,255,.62);font-weight:800;font-size:12px;">
+      © 2026 – AZUBI.OS (imaginär). <a style="color:rgba(255,255,255,.78);text-decoration:none;" href="agb.html">AGB</a> ·
+      <a style="color:rgba(255,255,255,.78);text-decoration:none;" href="datenschutz.html">Datenschutz</a> ·
+      <a style="color:rgba(255,255,255,.78);text-decoration:none;" href="impressum.html">Impressum</a>
     </div>
 
   </div>
